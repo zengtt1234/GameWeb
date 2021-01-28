@@ -1,0 +1,141 @@
+<template>
+  <div class="home">
+    <swiper ref="mySwiper" :options="swiperOptions">
+      <swiper-slide>
+        <img class="w-100" src="../assets/images/01d7cb8925cc35f2aa4011f4f3c7d69e.jpeg">
+      </swiper-slide>
+      <swiper-slide>
+        <img class="w-100" src="../assets/images/14e4fde9d63be6456cc35ad3ff7b0ea2.jpeg">
+      </swiper-slide>
+      <swiper-slide>
+        <img class="w-100" src="../assets/images/5468852df51056609aa6de26079860f5.jpeg">
+      </swiper-slide>
+      <div class="swiper-pagination pagination-home text-right px-3 pb-2"
+       slot="pagination">
+      </div>
+    </swiper>
+    <!-- end of swiper -->
+    <div class="nav-icons bg-white mt-3 text-center pt-3 text-grey-1">
+      <div class="d-flex flex-wrap">
+        <div class="nav-item mb-3" v-for="n in 10" :key="n">
+          <i class="sprite sprite-news"></i>
+          <div class="py-2">爆料站</div>
+        </div>
+      </div>
+      <div class="bg-light py-2 fs-sm">
+        <i class="sprite sprite-arrow mr-1"></i>
+        <span>收起</span>
+      </div>
+    </div>
+    <!-- end of nav-icons -->
+    <!-- <m-card icon='cc-menu-circle' title="新闻资讯">
+      <div class="card-body pt-3 ">
+        <div class="nav jc-between" >
+          <div class="nav-item active">
+            <div class="nav-link">热门</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">新闻</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">公告</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">活动</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-link">赛事</div>
+          </div>
+        </div>
+        <div class="pt-3">
+          <swiper>
+            <swiper-slide v-for="m in 5" :key="m">
+              <div class="py-2 d-flex" v-for="n in 5" :key="n">
+                <span>[新闻]</span>
+                <span>|</span>
+                <span class="flex-1">12月2日体验服违规处罚公告</span>
+                <span>12/02</span>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+    </m-card> -->
+    <m-list-card icon='cc-menu-circle' title="新闻资讯" :categories="newsCats">
+      <template #items="{category}">
+        <div class="py-2 fs-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
+          <span class="text-info">[{{news.categoryName}}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
+          <span class="text-grey-1 fs-sm">{{news.createdAt |date}}</span>
+        </div>
+      </template> 
+    </m-list-card>
+  </div>
+</template>
+
+<script>
+import dayjs from 'dayjs'
+export default {
+  name: 'Home',
+  filters:{
+    date(val){
+      return dayjs(val).format('MM/DD')
+    }
+  },
+  data() {
+    return {
+      swiperOptions: {
+        autoplay: { delay: 3000},   // 每隔3秒钟轮播另外一张图片
+        pagination: {
+          el: '.pagination-home'
+        },
+        // Some Swiper option/callback...
+      },
+      newsCats:[]
+    }
+  },
+  methods:{
+    async fetchNewsCats(){
+      const res = await this.$http.get('news/list')
+      this.newsCats = res.data
+    }
+  },
+  created(){
+    this.fetchNewsCats()
+  },
+  computed: {
+      swiper() {
+        return this.$refs.mySwiper.$swiper
+      }
+    },
+    mounted() {
+      console.log('Current Swiper instance object', this.swiper)
+      //this.$refs.mySwiper.swiper.slideTo(2, 1000, false)
+    }
+}
+</script>
+<style lang='scss'>
+@import '../assets/scss/_variables.scss';
+.pagination-home{
+  .swiper-pagination-bullet{
+    opacity: 1;
+    border-radius: 0.1538rem;
+    background: map-get($colors, 'white');
+    &.swiper-pagination-bullet-active{
+      background: map-get($colors, 'info');
+    }
+  }
+}
+.nav-icons{
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  .nav-item{
+    width: 25%;
+    border-right: 1px solid $border-color;
+    &:nth-child(4n){
+      border-left: none;
+    }
+  }
+}
+</style>
