@@ -83,6 +83,10 @@ module.exports = app => {
   //登陆的接口
   app.post('/admin/api/login',async(req,res)=>{
     const {username,password} = req.body
+    //////////////////////////////////////////////////////////
+    assert(username,422,'输入框不能为空')
+    assert(password,422,'输入框不能为空')
+    //////////////////////////////////////////////////////////
     //1.根据用户名找用户
     //由于我们在创建模型的时候，password是默认取不到的，在这里我们要取到password
     //要使用mongoose的API：Query.prototype.select()

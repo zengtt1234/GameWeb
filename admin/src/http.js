@@ -13,6 +13,9 @@ http.interceptors.request.use(function (config) {
   if(localStorage.token){
     config.headers.Authorization = 'Bearer ' + localStorage.token
   }
+  // if(sessionStorage.token){
+  //   config.headers.Authorization = 'Bearer ' + sessionStorage.token
+  // }
   
   return config;
 }, function (error) {
