@@ -4,6 +4,8 @@ import Main from '../views/Main'
 //import Login from '../views/Login'
 import Login from '../views/Logincopy'
 
+import Home from "../views/About"
+
 import CategoryEdit from '../views/CategoryEdit'
 import CategoryList from '../views/CategoryList'
 
@@ -43,13 +45,20 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Main',
+    // name: 'Main',
     component: Main,
     children:[
       {
+        path:"/",
+        redirect:"/home"
+      },
+      {
+        path: '/home',
+        component: Home,
+      },
+      {
         path: '/categories/create',
         component: CategoryEdit,
-
       },
       {
         path: '/categories/edit/:id',

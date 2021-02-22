@@ -6,7 +6,7 @@
       </el-table-column>
       <!-- <el-table-column prop="parent.name" label="上级分类">
       </el-table-column> -->
-      <el-table-column prop="name" label="物品名称">
+      <el-table-column prop="name" label="英雄名称">
       </el-table-column>
       <el-table-column prop="title" label="英雄称号">
       </el-table-column>
@@ -21,9 +21,9 @@
       width="180">
       <template slot-scope='scope'>
         <!-- <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button> -->
-        <el-button type="text" size="small" 
+        <el-button type="primary" size="small" 
         @click="$router.push(`edit/${scope.row._id}`)">编辑</el-button>
-        <el-button type="text" size="small" 
+        <el-button type="danger" size="small" 
         @click="remove(scope.row)">删除</el-button>
       </template>
     </el-table-column>

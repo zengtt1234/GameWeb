@@ -9,6 +9,6 @@ const schema = new mongoose.Schema({
       return require('bcrypt').hashSync(val,10)
     }
   }
-})
+},{ timestamps:true })
 
 module.exports = mongoose.model('AdminUser', schema)
