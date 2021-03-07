@@ -55,4 +55,24 @@ import {mapState, mapMutations} from 'vuex'
 .tabs .el-tag{
   margin-right: 15px;
 }
+
+.el-tag--plain{
+    background-color: #fff;
+    border-color: rgb(255, 208, 75);
+    color: rgb(255, 208, 75);
+}
+.el-tag--plain .el-tag__close {
+    color: rgb(255, 208, 75);
+}
+.el-tag--plain .el-tag__close:hover{
+    background: rgb(255, 187, 0);
+}
+.el-tag--dark {
+  background-color: rgb(255, 208, 75);
+  border-color: rgb(255, 208, 75);
+  color: #fff;
+}
+.el-tag--dark .el-tag__close:hover{
+    background: rgb(255, 187, 0);
+}
 </style>

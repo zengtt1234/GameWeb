@@ -6,7 +6,7 @@
     </el-menu-item>   
     <el-submenu v-for="(item, index) in hasChildren" :key="index" :index="index + ''">
       <template slot="title">
-        <i class="el-icon-suitcase"></i>
+        <i :class="item.icon"></i>
         <span>{{item.label}}</span>
       </template>
       <el-menu-item-group>
@@ -129,7 +129,7 @@ export default {
         },
         {
           label: '物品管理',
-          icon: "el-icon-files",
+          icon: "el-icon-box",
           children:[
             {
               name: "itemsList",
@@ -145,7 +145,7 @@ export default {
         },
         {
           label: '英雄管理',
-          icon: "el-icon-files",
+          icon: "el-icon-trophy",
           children:[
             {
               name: "heroesList",
@@ -161,7 +161,7 @@ export default {
         },
         {
           label: '文章管理',
-          icon: "el-icon-files",
+          icon: "el-icon-document",
           children:[
             {
               name: "articlesList",
@@ -177,7 +177,7 @@ export default {
         },
         {
           label: '广告位管理',
-          icon: "el-icon-files",
+          icon: "el-icon-postcard",
           children:[
             {
               name: "adsList",
@@ -209,7 +209,7 @@ export default {
         },
         {
           label: '管理员管理',
-          icon: "el-icon-files",
+          icon: "el-icon-s-custom",
           children:[
             {
               name: "admin_usersList",
