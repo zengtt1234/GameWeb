@@ -31,7 +31,18 @@ export default{
     },
     collapseMenu(state){
       state.isCollapse = !state.isCollapse;
+    },
+    resetTabsList(state){
+      state.tabsList = [
+        {
+          name: "home",
+          path: '/home',
+          label: '首页',
+          icon: "el-icon-s-home"
+        },
+      ]      
     }
+
   },
   actions: {
   },

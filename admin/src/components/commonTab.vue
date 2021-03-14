@@ -4,7 +4,7 @@
       :key="tag.name"
       v-for="tag in tags"
       :closable = "tag.name !== 'home'"
-      :disable-transitions="false"
+      :disable-transitions="true"
       @close="handleClose(tag)"
       size="small"
       @click="changeMenu(tag)"

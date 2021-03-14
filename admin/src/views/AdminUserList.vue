@@ -1,6 +1,9 @@
 <template>
   <div class="about">
-    <h1>管理员列表</h1>
+    <span class="search_item">用户名:</span>
+    <el-input v-model="input" placeholder="请输入用户名" style="width: 140px;margin-right: 10px" size="mini" @change="fetch" clearable></el-input>
+    <el-button type="primary"  @click="search"  size="mini">搜索</el-button>
+    <!-- <h1>管理员列表</h1> -->
     <el-table :data="items" v-loading='loading'>
       <el-table-column label="序号">
         <template slot-scope="scope">
@@ -47,6 +50,7 @@ export default {
   // },
   data(){
     return{
+      input:'',
       items:[],
       loading: false
     }
@@ -56,6 +60,20 @@ export default {
       const res =await this.$http.get('rest/admin_users')
       this.items = res.data;
       //console.log(this.items)
+    },
+    async search(){
+      if(this.input){
+        const res =await this.$http.get(`rest/admin_users/searchUser/${this.input}`)
+        this.items = res.data;
+        console.log(res.data);
+      }
+      else{
+        this.$message({
+          message: "输入框不能为空！",
+          type: "warning"
+        });
+        return;
+      }
     },
     async remove(row){
       this.$confirm(`是否确定删除"${row.username}"?`, '提示', {
@@ -80,3 +98,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.search_item{
+  font-size: 14px;
+  color: #909399;
+  padding-right: 10px;
+}
+</style>

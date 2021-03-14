@@ -1,6 +1,9 @@
 <template>
   <div class="about">
-    <h1>英雄列表</h1>
+    <span class="search_item">英雄名称:</span>
+    <el-input v-model="input" placeholder="请输入英雄名称" style="width: 140px;margin-right: 10px" size="mini" @change="fetch" clearable></el-input>
+    <el-button type="primary"  @click="search"  size="mini">搜索</el-button>
+    <!-- <h1>英雄列表</h1> -->
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width='220'>
       </el-table-column>
@@ -34,13 +37,28 @@
 export default {
   data(){
     return{
-      items:[]
+      items:[],
+      input:''
     }
   },
   methods:{
     async fetch(){
       const res =await this.$http.get('rest/heroes')
       this.items = res.data
+    },
+    async search(){
+      if(this.input){
+        const res =await this.$http.get(`rest/heroes/searchHero/${this.input}`)
+        this.items = res.data;
+        console.log(res.data);
+      }
+      else{
+        this.$message({
+          message: "输入框不能为空！",
+          type: "warning"
+        });
+        return;
+      }
     },
     async remove(row){
       this.$confirm(`是否确定删除分类"${row.name}"?`, '提示', {
@@ -62,3 +80,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.search_item{
+  font-size: 14px;
+  color: #909399;
+  padding-right: 10px;
+}
+</style>

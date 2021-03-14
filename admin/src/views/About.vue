@@ -19,6 +19,16 @@ export default {
     background-color: rgb(228, 169, 9);
     border-color: rgb(255, 187, 0)
 }
+/* .el-button--primary:visited{
+    color: #FFF;
+    background-color: rgb(255, 187, 0);
+    border-color: rgb(255, 187, 0)
+} */
+.el-button--primary:focus{
+    color: #FFF;
+    background-color: rgb(255, 187, 0);
+    border-color: rgb(255, 187, 0)
+}
 .el-button--danger {
     color: #FFF;
     background-color: #ff5e00;

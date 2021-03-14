@@ -18,11 +18,11 @@
     <div class="r_content">
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          用户名<i class="el-icon-arrow-down el-icon--right"></i>
+          {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
+          <!-- <el-dropdown-item>个人中心</el-dropdown-item> -->
+          <el-dropdown-item @click.native="exit">退出登陆</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -47,7 +47,8 @@ import {mapState} from 'vuex'
 export default {
   computed:{
     ...mapState({
-      current: state => state.tab.currentMenu
+      current: state => state.tab.currentMenu,
+      userName: state => state.user.currentUser,
     }),
 
   },
@@ -60,6 +61,18 @@ export default {
     collapseMenu(){
       this.$store.commit("collapseMenu")
       this.isCollapseMenu = !this.isCollapseMenu;
+    },
+    exit(){
+      //清除token
+      this.$store.commit("clearToken")
+      //清除用户名
+      this.$store.commit("clearCurrentUser")
+      //把tab清空
+      this.$store.commit("resetTabsList")
+      //刷新浏览页面
+      location.reload();
+
+      
     }    
   }
 }

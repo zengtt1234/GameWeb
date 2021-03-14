@@ -156,7 +156,8 @@ export default {
     },
     async fetchCategories(){
       const res = await this.$http.get(`rest/categories`)
-      this.categories = res.data
+      this.categories = res.data;
+      console.log(res.data);
     },
     async fetchItems(){
       const res = await this.$http.get(`rest/items`)

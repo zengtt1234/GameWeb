@@ -56,15 +56,101 @@ module.exports = app => {
     //res.send('categories')
   })
 
+  //查找英雄分类列表接口
+  // router.get('/',async(req,res) => {
+  //   const queryOptions = {}
+  //   if(req.Model.modelName === 'Category'){
+  //     queryOptions.populate = 'parent'
+  //   }
+  //   //populate关联查询，获取关联对象
+  //   //const items = await req.Model.find().populate('parent').limit(10)
+  //   //setOptions为条件选择
+  //   const items = await req.Model.find().setOptions(queryOptions).limit(100)
+  //   res.send(items)
+  //   //res.send('categories')
+  // })
+
+    //管理员查找接口
+    router.get('/searchUser/:input',async(req,res) => {
+      //模糊查询
+      const model = await req.Model.find({
+          username:{
+              $regex:req.params.input
+          }
+      })
+      res.send(model);
+      //精确查询
+      // const model = await req.Model.find({"username":req.params.input})
+      // res.send(model);
+    })
+
+    //英雄查找接口
+    router.get('/searchHero/:input',async(req,res) => {
+      //模糊查询
+      const model = await req.Model.find({
+          name:{
+              $regex:req.params.input
+          }
+      })
+      res.send(model);
+      //精确查询
+      // const model = await req.Model.find({"username":req.params.input})
+      // res.send(model);
+    })
+
+    //物品查找接口
+    router.get('/searchItem/:input',async(req,res) => {
+      //模糊查询
+      const model = await req.Model.find({
+          name:{
+              $regex:req.params.input
+          }
+      })
+      res.send(model);
+      //精确查询
+      // const model = await req.Model.find({"username":req.params.input})
+      // res.send(model);
+    })
+
+    //文章标题查找接口
+    router.get('/searchArticle/:input',async(req,res) => {
+      //模糊查询
+      const model = await req.Model.find({
+          title:{
+              $regex:req.params.input
+          }
+      })
+      res.send(model);
+      //精确查询
+      // const model = await req.Model.find({"username":req.params.input})
+      // res.send(model);
+    })
+
+    //广告位查找接口
+    router.get('/searchAd/:input',async(req,res) => {
+      //模糊查询
+      const model = await req.Model.find({
+          name:{
+              $regex:req.params.input
+          }
+      })
+      res.send(model);
+      //精确查询
+      // const model = await req.Model.find({"username":req.params.input})
+      // res.send(model);
+    })
 
 
-  //通过_id查找数据详情接口
+  //通过查找数据详情接口
   router.get('/:id',async(req,res) => {
     const model = await req.Model.findById(req.params.id)
     res.send(model)
     //res.send('categories')
   })
+
   
+
+
   app.use('/admin/api/rest/:resource',authMiddleWare(),resourceMiddleWare(),router)
 
 

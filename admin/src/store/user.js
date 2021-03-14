@@ -1,19 +1,26 @@
 export default{
   state: {
-    token:''
+    token:'',
+    currentUser: null,
   },
   mutations: {
     setToken(state, val){
       state.token = val;
-      Cookie.set('token', val);
     },
     clearToken(state){
       state.token = '';
-      Cookie.remove('token');
+      localStorage.clear('token');
     },
     getToken(state){
-      state.token = Cookie.get('token');
-    }
+      state.token = localStorage.getItem("token");
+    },
+    setCurrentUser(state,val){
+      state.currentUser = val;
+    },
+    clearCurrentUser(state){
+      state.currentUser = '';
+      localStorage.clear('currentUser');
+    },
   },
   actions: {
 

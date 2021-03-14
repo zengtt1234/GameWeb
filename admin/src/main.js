@@ -11,6 +11,9 @@ Vue.config.productionTip = false
 import http from './http'
 Vue.prototype.$http = http
 
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
+
 //代码混用，让每个VUE的实例都拥有
 Vue.mixin({
   computed:{

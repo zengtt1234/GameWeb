@@ -92,9 +92,18 @@ export default {
       const res = await this.$http.post('login',this.model)
       //请求数据完成，获取到的应该是一个token
       //console.log(res.data);
+
       //将放回的token写入浏览器存储localStorage
       //localStorage浏览器关闭后还有
-      localStorage.token = res.data.token
+
+      //将token和用户名保存到localStorage
+      localStorage.token = res.data.token;
+      localStorage.currentUser = this.model.username;
+
+      //将token和用户名保存到vuex
+      this.$store.commit('setToken', res.data.token);
+      this.$store.commit("setCurrentUser",this.model.username);
+
       //sessionStorage浏览器关闭后就没有了
       //sessionStorage.token = res.data.token
       this.$router.push('/')
