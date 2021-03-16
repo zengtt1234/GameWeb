@@ -2,8 +2,13 @@
   <div class="about">
     <!-- <h1>分类列表</h1> -->
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width='220'>
+      <el-table-column label="序号">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index }}</span>
+        </template>
       </el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width='220'>
+      </el-table-column> -->
       <el-table-column prop="parent.name" label="上级分类">
       </el-table-column>
       <el-table-column prop="name" label="分类名称">

@@ -1,12 +1,22 @@
 <template>
   <div class="about">
-    <span class="search_item">物品名称:</span>
-    <el-input v-model="input" placeholder="请输入物品名称" style="width: 140px;margin-right: 10px" size="mini" @change="fetch" clearable></el-input>
-    <el-button type="primary"  @click="search"  size="mini">搜索</el-button>
+    <div style="display: flex;justify-content: space-between;">
+      <div>
+        <span class="search_item">物品名称:</span>
+        <el-input v-model="input" placeholder="请输入物品名称" style="width: 140px;margin-right: 10px" size="mini" @change="fetch" clearable></el-input>
+        <el-button type="primary"  @click="search"  size="mini">搜索</el-button>      
+      </div>
+      <!-- <el-button type="primary" @click="additem" size="mini">新增物品</el-button>       -->
+    </div>
     <!-- <h1>物品列表</h1> -->
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width='220'>
+      <el-table-column label="序号">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index }}</span>
+        </template>
       </el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width='220'>
+      </el-table-column> -->
       <!-- <el-table-column prop="parent.name" label="上级分类">
       </el-table-column> -->
       <el-table-column prop="name" label="物品名称">

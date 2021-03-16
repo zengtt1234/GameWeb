@@ -5,8 +5,13 @@
     <el-button type="primary"  @click="search"  size="mini">搜索</el-button>
     <!-- <h1>广告位列表</h1> -->
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width='220'>
+      <el-table-column label="序号">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index }}</span>
+        </template>
       </el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width='220'>
+      </el-table-column> -->
       <el-table-column prop="name" label="名称">
       </el-table-column>
       <el-table-column

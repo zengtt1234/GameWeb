@@ -5,8 +5,13 @@
     <el-button type="primary"  @click="search"  size="mini">搜索</el-button>
     <!-- <h1>文章列表</h1> -->
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width='220'>
+      <el-table-column label="序号">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index }}</span>
+        </template>
       </el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width='220'>
+      </el-table-column> -->
       <el-table-column prop="title" label="文章标题">
       </el-table-column>
       <el-table-column
@@ -36,6 +41,7 @@ export default {
     async fetch(){
       const res =await this.$http.get('rest/articles')
       this.items = res.data
+      console.log(res.data);
     },
     async search(){
       if(this.input){

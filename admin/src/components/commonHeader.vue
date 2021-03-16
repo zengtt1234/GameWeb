@@ -48,13 +48,14 @@ export default {
   computed:{
     ...mapState({
       current: state => state.tab.currentMenu,
-      userName: state => state.user.currentUser,
+      // userName: state => state.user.currentUser,
     }),
 
   },
   data(){
     return{
-      isCollapseMenu: "false"
+      isCollapseMenu: "false",
+      userName: localStorage.currentUser
     }
   },
   methods:{
