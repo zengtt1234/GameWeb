@@ -1,5 +1,6 @@
 //后端路由
 module.exports = app => {
+  //定义一个express
   const express = require('express')
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/AdminUser')
@@ -150,7 +151,7 @@ module.exports = app => {
 
   
 
-
+  //将子路由router挂载上去
   app.use('/admin/api/rest/:resource',authMiddleWare(),resourceMiddleWare(),router)
 
 
@@ -194,8 +195,11 @@ module.exports = app => {
     //3.返回token
     //const jwt = require('jsonwebtoken')
     //参数二为密钥,写在全局里面了
+
+    //4.获取角色权限
+    const role = user.role;
     const token = jwt.sign({id: user._id},app.get('secret'))
-    res.send({token})
+    res.send({token, role})
   })
 
   //错误处理

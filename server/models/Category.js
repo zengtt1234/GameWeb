@@ -1,5 +1,6 @@
+//引入mongoose
 const mongoose = require('mongoose')
-
+//定义模型的字段
 const schema = new mongoose.Schema({
   name:{type: String},
   //用Schema.Types.ObjectId 来声明一个对象ID类型。对象ID同MongoDB内置的_id 的类型。由24位Hash字符串。
@@ -19,4 +20,5 @@ schema.virtual('newsList',{
   justOne:false,
   ref:'Article'
 })
+//将模型导出
 module.exports = mongoose.model('Category', schema)

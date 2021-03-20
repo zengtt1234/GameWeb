@@ -91,7 +91,7 @@ export default {
     async login(){
       const res = await this.$http.post('login',this.model)
       //请求数据完成，获取到的应该是一个token
-      //console.log(res.data);
+      console.log(res.data);
 
       //将放回的token写入浏览器存储localStorage
       //localStorage浏览器关闭后还有

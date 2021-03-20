@@ -14,13 +14,13 @@ export default{
     getToken(state){
       state.token = localStorage.getItem("token");
     },
-    // setCurrentUser(state,val){
-    //   state.currentUser = val;
-    // },
-    // clearCurrentUser(state){
-    //   state.currentUser = '';
-    //   localStorage.clear('currentUser');
-    // },
+    setCurrentUser(state,val){
+      state.currentUser = val;
+    },
+    clearCurrentUser(state){
+      state.currentUser = '';
+      localStorage.clear('currentUser');
+    },
   },
   actions: {
 

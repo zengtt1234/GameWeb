@@ -8,10 +8,10 @@
       <el-form-item label='密码'>
         <el-input v-model="model.password" type='text'></el-input>
       </el-form-item>
-      <!-- <el-form-item>
-        <el-radio v-model="role" label="1">普通管理员</el-radio>
-        <el-radio v-model="role" label="2">超级管理员</el-radio>
-      </el-form-item>       -->
+      <el-form-item>
+        <el-radio v-model="model.role" label="1">普通管理员</el-radio>
+        <el-radio v-model="model.role" label="2">超级管理员</el-radio>
+      </el-form-item>      
       <el-form-item>
         <el-button type='primary' native-type='submit'>保存</el-button>
       </el-form-item>
@@ -25,7 +25,7 @@ export default {
   },
   data(){
     return{
-      model: {},
+      model: {role: '1'},
       // role: '1'
     }
   },

@@ -18,6 +18,12 @@
       <el-table-column prop="username" label="用户名">
       </el-table-column>
 
+      <el-table-column prop="role" label="角色">
+        <template slot-scope="scope">
+          <el-button type="info" round v-if="scope.row.role=='1'" size="mini">普通管理员</el-button>
+          <el-button type="primary" round v-else-if="scope.row.role=='2'" size="mini">超级管理员</el-button>
+        </template>
+      </el-table-column>
 
       <el-table-column prop="createdAt" label="创建时间" :formatter="dateFormat">
       </el-table-column>
@@ -59,7 +65,7 @@ export default {
     async fetch(){
       const res =await this.$http.get('rest/admin_users')
       this.items = res.data;
-      //console.log(this.items)
+      console.log(this.items)
     },
     async search(){
       if(this.input){
