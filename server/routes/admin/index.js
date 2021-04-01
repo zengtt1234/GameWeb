@@ -47,6 +47,7 @@ module.exports = app => {
   router.get('/',async(req,res) => {
     const queryOptions = {}
     if(req.Model.modelName === 'Category'){
+      //populate关联查询，获取关联对象的完整信息，而不仅仅是一个id
       queryOptions.populate = 'parent'
     }
     //populate关联查询，获取关联对象
@@ -188,8 +189,8 @@ module.exports = app => {
     //     message:'用户不存在'
     //   })
     // }
-    //2.校验密码
-    //第一个参数为明文，第二个参数为密文,返回值为boolean
+    //2.校验密码，由于我们用bcrypt对密码进行散列加密，所以用bcrypt来校验
+    //compareSync检验明文和密文是否匹配，第一个参数为明文，第二个参数为密文,返回值为boolean
     const isValid = require('bcrypt').compareSync(password,user.password)
     assert(isValid,422,'密码错误')
     //3.返回token
@@ -198,8 +199,234 @@ module.exports = app => {
 
     //4.获取角色权限
     const role = user.role;
+    var menu;
+    //5.放回权限对应的路由菜单，让前端动态生成路由
+    //普通管理员
+    if(role === '1'){
+      menu = [
+        {
+          name: "home",
+          path: '/',
+          label: '首页',
+          icon: "el-icon-s-home",
+          url: 'About'
+        },
+        {
+          label: '物品管理',
+          icon: "el-icon-box",
+          children:[
+            {
+              name: "itemsList",
+              path: '/items/list',
+              label: '物品列表',
+              url: 'ItemList'
+            },
+            {
+              name: "itemsCreate",
+              path: '/items/create',
+              label: '新建物品',
+              url: 'ItemEdit'
+            }
+          ]          
+        },
+        {
+          label: '英雄管理',
+          icon: "el-icon-trophy",
+          children:[
+            {
+              name: "heroesList",
+              path: '/heroes/list',
+              label: '英雄列表',
+              url:'HeroList'
+            },
+            {
+              name: "heroesCreate",
+              path: '/heroes/create',
+              label: '新建英雄',
+              url:'HeroEdit'
+            }
+          ]          
+        },
+        {
+          label: '文章管理',
+          icon: "el-icon-document",
+          children:[
+            {
+              name: "articlesList",
+              path: '/articles/list',
+              label: '文章列表',
+              url:'ArticleList'
+            },
+            {
+              name: "articlesCreate",
+              path: '/articles/create',
+              label: '新建文章',
+              url: 'ArticleEdit'
+            }
+          ]          
+        },
+        {
+          label: '广告位管理',
+          icon: "el-icon-postcard",
+          children:[
+            {
+              name: "adsList",
+              path: '/ads/list',
+              label: '广告位列表',
+              url:'AdList'
+            },
+            {
+              name: "adsCreate",
+              path: '/ads/create',
+              label: '新建广告位',
+              url: 'AdEdit'
+            }
+          ]          
+        },
+        {
+          label: '分类管理',
+          icon: "el-icon-files",
+          children:[
+            {
+              name: "categoriesList",
+              path: '/categories/list',
+              label: '分类列表',
+              url: 'CategoryList'
+            },
+            {
+              name: "categoriesCreate",
+              path: '/categories/create',
+              label: '新建分类',
+              url: 'CategoryEdit'
+            }
+          ]          
+        }
+      ]
+    }
+    //超级管理员
+    if(role === "2"){
+      menu = [
+        {
+          name: "home",
+          path: '/',
+          label: '首页',
+          icon: "el-icon-s-home",
+          url: 'About'
+        },
+        {
+          label: '物品管理',
+          icon: "el-icon-box",
+          children:[
+            {
+              name: "itemsList",
+              path: '/items/list',
+              label: '物品列表',
+              url: 'ItemList'
+            },
+            {
+              name: "itemsCreate",
+              path: '/items/create',
+              label: '新建物品',
+              url: 'ItemEdit'
+            }
+          ]          
+        },
+        {
+          label: '英雄管理',
+          icon: "el-icon-trophy",
+          children:[
+            {
+              name: "heroesList",
+              path: '/heroes/list',
+              label: '英雄列表',
+              url:'HeroList'
+            },
+            {
+              name: "heroesCreate",
+              path: '/heroes/create',
+              label: '新建英雄',
+              url:'HeroEdit'
+            }
+          ]          
+        },
+        {
+          label: '文章管理',
+          icon: "el-icon-document",
+          children:[
+            {
+              name: "articlesList",
+              path: '/articles/list',
+              label: '文章列表',
+              url:'ArticleList'
+            },
+            {
+              name: "articlesCreate",
+              path: '/articles/create',
+              label: '新建文章',
+              url: 'ArticleEdit'
+            }
+          ]          
+        },
+        {
+          label: '广告位管理',
+          icon: "el-icon-postcard",
+          children:[
+            {
+              name: "adsList",
+              path: '/ads/list',
+              label: '广告位列表',
+              url:'AdList'
+            },
+            {
+              name: "adsCreate",
+              path: '/ads/create',
+              label: '新建广告位',
+              url: 'AdEdit'
+            }
+          ]          
+        },
+        {
+          label: '分类管理',
+          icon: "el-icon-files",
+          children:[
+            {
+              name: "categoriesList",
+              path: '/categories/list',
+              label: '分类列表',
+              url: 'CategoryList'
+            },
+            {
+              name: "categoriesCreate",
+              path: '/categories/create',
+              label: '新建分类',
+              url: 'CategoryEdit'
+            }
+          ]          
+        },
+        {
+          label: '管理员管理',
+          icon: "el-icon-s-custom",
+          children:[
+            {
+              name: "admin_usersList",
+              path: '/admin_users/list',
+              label: '管理员列表',
+              url:'AdminUserList'
+            },
+            {
+              name: "admin_usersCreate",
+              path: '/admin_users/create',
+              label: '新建管理员',
+              url:'AdminUserEdit'
+            }
+          ]          
+        }
+      ]
+
+    }
+    
     const token = jwt.sign({id: user._id},app.get('secret'))
-    res.send({token, role})
+    res.send({token, role, menu})
   })
 
   //错误处理

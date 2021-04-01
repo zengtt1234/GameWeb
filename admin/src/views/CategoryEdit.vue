@@ -51,8 +51,16 @@ export default {
       
     },
     async fetchParents(){
+        var ParentsList=[];
         const res = await this.$http.get(`rest/categories`)
-        this.parents = res.data
+        console.log(res.data)
+        res.data.forEach(item => {
+          if(!item.parent){
+            ParentsList.push(item)
+          }
+        });
+        // this.parents = res.data
+        this.parents = ParentsList
       
       
     }

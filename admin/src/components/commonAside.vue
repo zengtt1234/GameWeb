@@ -105,124 +105,137 @@ export default {
   methods:{
     clickMenu(item){
       this.$store.commit('selectMenu', item)
-    }
+    },
+    // menu(){
+    //   // console.log(this.$store.state.tab.menu);
+    //   if(this.$store.state.tab.menu){
+    //     this.asideMenu.push(this.$store.state.tab.menu);
+    //   }
+
+    //   // console.log(this.asideMenu);
+    // }
   },
   computed:{
     noChildren(){
-      return this.asideMenu.filter(item => !item.children);
+      // return this.asideMenu.filter(item => !item.children);
+      return this.menu.filter(item => !item.children);
     },
     hasChildren(){
-      return this.asideMenu.filter(item => item.children);
+      // return this.asideMenu.filter(item => item.children);
+      return this.menu.filter(item => item.children);
     },
     isCollapse(){
       return this.$store.state.tab.isCollapse;
+    },
+    menu(){
+      return JSON.parse(localStorage.menu);
     }
   },
   data(){
     return{
       asideMenu:[
-        {
-          name: "home",
-          path: '/home',
-          label: '首页',
-          icon: "el-icon-s-home"
-        },
-        {
-          label: '物品管理',
-          icon: "el-icon-box",
-          children:[
-            {
-              name: "itemsList",
-              path: '/items/list',
-              label: '物品列表',
-            },
-            {
-              name: "itemsCreate",
-              path: '/items/create',
-              label: '新建物品',
-            }
-          ]          
-        },
-        {
-          label: '英雄管理',
-          icon: "el-icon-trophy",
-          children:[
-            {
-              name: "heroesList",
-              path: '/heroes/list',
-              label: '英雄列表',
-            },
-            {
-              name: "heroesCreate",
-              path: '/heroes/create',
-              label: '新建英雄',
-            }
-          ]          
-        },
-        {
-          label: '文章管理',
-          icon: "el-icon-document",
-          children:[
-            {
-              name: "articlesList",
-              path: '/articles/list',
-              label: '文章列表',
-            },
-            {
-              name: "articlesCreate",
-              path: '/articles/create',
-              label: '新建文章',
-            }
-          ]          
-        },
-        {
-          label: '广告位管理',
-          icon: "el-icon-postcard",
-          children:[
-            {
-              name: "adsList",
-              path: '/ads/list',
-              label: '广告位列表',
-            },
-            {
-              name: "adsCreate",
-              path: '/ads/create',
-              label: '新建广告位',
-            }
-          ]          
-        },
-        {
-          label: '分类管理',
-          icon: "el-icon-files",
-          children:[
-            {
-              name: "categoriesList",
-              path: '/categories/list',
-              label: '分类列表',
-            },
-            {
-              name: "categoriesCreate",
-              path: '/categories/create',
-              label: '新建分类',
-            }
-          ]          
-        },
-        {
-          label: '管理员管理',
-          icon: "el-icon-s-custom",
-          children:[
-            {
-              name: "admin_usersList",
-              path: '/admin_users/list',
-              label: '管理员列表',
-            },
-            {
-              name: "admin_usersCreate",
-              path: '/admin_users/create',
-              label: '新建管理员',
-            }
-          ]          
-        },
+        // {
+        //   name: "home",
+        //   path: '/home',
+        //   label: '首页',
+        //   icon: "el-icon-s-home"
+        // },
+        // {
+        //   label: '物品管理',
+        //   icon: "el-icon-box",
+        //   children:[
+        //     {
+        //       name: "itemsList",
+        //       path: '/items/list',
+        //       label: '物品列表',
+        //     },
+        //     {
+        //       name: "itemsCreate",
+        //       path: '/items/create',
+        //       label: '新建物品',
+        //     }
+        //   ]          
+        // },
+        // {
+        //   label: '英雄管理',
+        //   icon: "el-icon-trophy",
+        //   children:[
+        //     {
+        //       name: "heroesList",
+        //       path: '/heroes/list',
+        //       label: '英雄列表',
+        //     },
+        //     {
+        //       name: "heroesCreate",
+        //       path: '/heroes/create',
+        //       label: '新建英雄',
+        //     }
+        //   ]          
+        // },
+        // {
+        //   label: '文章管理',
+        //   icon: "el-icon-document",
+        //   children:[
+        //     {
+        //       name: "articlesList",
+        //       path: '/articles/list',
+        //       label: '文章列表',
+        //     },
+        //     {
+        //       name: "articlesCreate",
+        //       path: '/articles/create',
+        //       label: '新建文章',
+        //     }
+        //   ]          
+        // },
+        // {
+        //   label: '广告位管理',
+        //   icon: "el-icon-postcard",
+        //   children:[
+        //     {
+        //       name: "adsList",
+        //       path: '/ads/list',
+        //       label: '广告位列表',
+        //     },
+        //     {
+        //       name: "adsCreate",
+        //       path: '/ads/create',
+        //       label: '新建广告位',
+        //     }
+        //   ]          
+        // },
+        // {
+        //   label: '分类管理',
+        //   icon: "el-icon-files",
+        //   children:[
+        //     {
+        //       name: "categoriesList",
+        //       path: '/categories/list',
+        //       label: '分类列表',
+        //     },
+        //     {
+        //       name: "categoriesCreate",
+        //       path: '/categories/create',
+        //       label: '新建分类',
+        //     }
+        //   ]          
+        // },
+        // {
+        //   label: '管理员管理',
+        //   icon: "el-icon-s-custom",
+        //   children:[
+        //     {
+        //       name: "admin_usersList",
+        //       path: '/admin_users/list',
+        //       label: '管理员列表',
+        //     },
+        //     {
+        //       name: "admin_usersCreate",
+        //       path: '/admin_users/create',
+        //       label: '新建管理员',
+        //     }
+        //   ]          
+        // },
       ]
     }
   }

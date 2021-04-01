@@ -70,6 +70,8 @@ export default {
       this.$store.commit("clearCurrentUser")
       //把tab清空
       this.$store.commit("resetTabsList")
+      //清空权限列表
+      this.$store.commit("clearMenu")
       //刷新浏览页面
       location.reload();
 

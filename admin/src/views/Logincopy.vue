@@ -90,19 +90,25 @@ export default {
   methods:{
     async login(){
       const res = await this.$http.post('login',this.model)
-      //请求数据完成，获取到的应该是一个token
-      console.log(res.data);
+      //请求数据完成，获取到的应该是一个token,和角色动态路由菜单
+      // console.log(res.data);
 
       //将放回的token写入浏览器存储localStorage
       //localStorage浏览器关闭后还有
 
-      //将token和用户名保存到localStorage
+      //将token和用户名和menu保存到localStorage
       localStorage.token = res.data.token;
       localStorage.currentUser = this.model.username;
+      localStorage.setItem('menu',JSON.stringify(res.data.menu))
+      // localStorage.menu = res.data.menu;
 
-      //将token和用户名保存到vuex
+      //将token和用户名和menu保存到vuex
       this.$store.commit('setToken', res.data.token);
       this.$store.commit("setCurrentUser",this.model.username);
+      this.$store.commit('setMenu', res.data.menu);
+
+      //添加动态路由
+      this.$store.commit('addMenu',this.$router)
 
       //sessionStorage浏览器关闭后就没有了
       //sessionStorage.token = res.data.token

@@ -12,11 +12,20 @@
         padding: 0;
       }
     </style>
+
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <script src="<%= BASE_URL %>static/three.min.js"></script>
+    <script src="<%= BASE_URL %>static/OrbitControls.js"></script>
+    <script src="<%= BASE_URL %>static/DRACOLoader.js"></script>
+    <script src="<%= BASE_URL %>static/GLTFLoader.js"></script>
+    <script src="<%= BASE_URL %>static/OBJLoader.js"></script>
+    <script src="<%= BASE_URL %>static/MTLLoader.js"></script>
+    
+    <script src="<%= BASE_URL %>static/echarts.min.js"></script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

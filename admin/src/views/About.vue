@@ -16,22 +16,23 @@
       <el-card shadow="hover" class="item">
         <div style="display: flex;flex-direction: column;height: 120px">
           <span class="item_num">54321</span>
-          <span class="item_title">本周累计(次)</span>          
+          <span class="item_title">本周浏览量(次)</span>          
         </div>
       </el-card>
       <el-card shadow="hover" class="item">
         <div style="display: flex;flex-direction: column;height: 120px">
           <span class="item_num">654321</span>
-          <span class="item_title">本月累计(次)</span>          
+          <span class="item_title">本月浏览量(次)</span>          
         </div>
       </el-card>
     </div>
     <div>
       <div class="chart_content_one">
         <el-card shadow="hover" class="chart_one">
-          <div  id="one" style="width:100px;height: 100px"></div>
+          <div  id="one" style="width:100%;height: 200px"></div>
         </el-card>
-        <el-card shadow="hover" class="chart_two" id="two">
+        <el-card shadow="hover" class="chart_two">
+          <div  id="two" style="width:100%;height: 200px"></div>
         </el-card>             
       </div>
     </div>
@@ -45,6 +46,12 @@
 
 <script>
 // import Echart from '@/components/EChart'
+import {initChargeChart} from '@/charts/initChargeChart'
+import {initAccessCarChart} from "@/charts/initAccessCarChart"
+import { initCarportMsgCharts } from "@/charts/initCarportMsgCharts.js"
+import { initNoiseChart } from "@/charts/initNoiseChart.js"
+import {initConsumptionChart} from '@/charts/initConsumptionChart.js'
+
 export default {
   components: {
 
@@ -55,20 +62,21 @@ export default {
     }
   },
   methods: {
-
+    initChargeChart,
+    initAccessCarChart,
+    initCarportMsgCharts,
+    initNoiseChart,
+    initConsumptionChart,
   },
   created() {
 
   },
   mounted(){
-    this.$nextTick(function(){
-        // //充电桩信息圆环图表
-        // initChargeChart({ domId:'initChargeChart'})
-        // //充电桩充电功率图表
-        // initChargeConsumptionChart({ domId: "initChargeConsumptionChart"})
+        this.initAccessCarChart({ domId: "one" })
+        // this.initNoiseChart({ domId: "two" })
+        this.initChargeChart({ domId: 'two'})
+        this.initConsumptionChart({ domId: "three" })
 
-
-    })
   },
 }
 </script>

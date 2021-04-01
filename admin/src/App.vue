@@ -16,6 +16,9 @@ export default {
     window.addEventListener('beforeunload', () => {
       sessionStorage.setItem('store', JSON.stringify(this.$store.state));
     });
+
+    //在页面刷新的时候，动态添加路由
+    this.$store.commit('addMenu',this.$router)
   }
 }
 </script>

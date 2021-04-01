@@ -46,7 +46,8 @@ export default {
     },
     async fetch(){
         const res = await this.$http.get(`rest/admin_users/${this.id}`)
-        this.model = res.data
+        // this.model = res.data;
+        this.model = Object.assign({},this.model,res.data)
       
     },
     

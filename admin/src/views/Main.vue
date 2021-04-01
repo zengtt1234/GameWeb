@@ -114,6 +114,6 @@ import commonTab from "@/components/commonTab"
       return {
         tableData: Array(20).fill(item)
       }
-    }
+    },
   };
 </script>
